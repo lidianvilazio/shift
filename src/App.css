@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: red; }
+
+#timer {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  border-radius: 15px;
+  background-clip: padding-box;
+  /* stops bg color from     leaking outside the border: */
+  width: 150px;
+  height: 150px;
+  background-color: green; }
