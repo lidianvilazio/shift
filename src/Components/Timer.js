@@ -5,29 +5,37 @@ class  Timer  extends React.Component {
 
   state = {
     num: 0,
-    clicked: false,
-    split: null,
+    buttonOn: false,
     list: [],
     interval: null,
     select: undefined,
-    pause: false
+    pause: false,
   }
 
-  click = () => {
-    this.setState({
-      interval: setInterval(() => {this.setState({num: this.state.num+1})}, 1000),
-      clicked: !this.state.clicked,
-      pause: false,
-    })
+  start = () => {
+    if(this.state.select) {
+      this.setState({
+        interval: setInterval(() => {this.setState({num: this.state.num+1})}, 1000),
+        buttonOn: !this.state.buttonOn,
+        pause: false,
+        list: [...this.state.list, this.state.select],
+        select: undefined
+      })
+    } else {
+      this.setState({
+        interval: setInterval(() => {this.setState({num: this.state.num+1})}, 1000),
+        buttonOn: !this.state.buttonOn,
+        pause: false,
+      })
+
+    }
   }
 
-  clicking = () => {
+  gettingNumber = () => {
     let num = this.state.num / 2
-    this.setState({list: [...this.state.list, num].sort(function(a, b){return b - a})})
-  }
-
-  otherSet = () => {
-    this.clicking()
+    if(this.state.list.indexOf(num) === -1) {
+      this.setState({list: [num, ...this.state.list]})
+    }
   }
 
   clean = (num) => {
@@ -40,24 +48,31 @@ class  Timer  extends React.Component {
   end = () => {
     this.setState({
       num: 0,
-      clicked: false,
+      buttonOn: false,
       pause: true,
-      select: undefined
     }, () => {clearInterval(this.state.interval)})
   }
 
 
   render() {
-    let s = this.state.list.map((i) => <SingleElement s={i} clean={this.clean} end={this.end} pause={this.state.pause}/>)
+
+    let element = this.state.list.map((element, elementKey) => {
+      return <SingleElement key={elementKey} element={element} clean={this.clean} end={this.end} pause={this.state.pause}/>
+    })
 
     return(
-      <div className='main'>
-        {this.state.num > 0 ? this.state.num : null}<br/>
-        {this.state.clicked ? <button onClick={this.clicking}>Count</button> : <button onClick={this.click}>Count</button>}<br/><br/>
-        {this.state.split ? this.state.split : null}
-        {this.state.list.length > 0 ? s : null}
-        {this.state.select ? <SingleElement s={this.state.select} end={this.end} clicked={'clicked'} pause={this.state.pause}/> : null}
+
+      <div id='grid'>
+        <div>
+          <h1 id='title'>Timer</h1>
+          {this.state.buttonOn ? <button onClick={this.gettingNumber}>{this.state.num}</button> : <button onClick={this.start}>Start</button>}
+        </div>
+        <div id='single'>
+         {this.state.list.length > 0 ? element : null}
+         {this.state.select ? <SingleElement select={this.state.select} end={this.end} buttonOn={'buttonOn'} pause={this.state.pause}/> : null}
+        </div>
       </div>
+      
     )
   }
 }

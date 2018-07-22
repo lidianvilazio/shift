@@ -3,22 +3,27 @@ import React from 'react'
 class SingleElement extends React.Component {
 
   state = {
-    clicked: false
+    selected: false
   }
 
-  click = () => {
+  selectNumber = () => {
     if(!this.props.pause) {
-      this.setState({clicked: !this.state.clicked}, () => {this.props.clean(this.props.s)})
+      if(this.props.select === undefined) {
+        this.setState({selected: true}, () => {this.props.clean(this.props.element)})
+      }
     }
   }
 
   render() {
 
     return(
-      <div>
-        {this.state.clicked ? this.props.end()
-          : <div className={this.props.clicked} onClick= {this.click}>{this.props.s}</div>}
+      <div className='SingleElement'>
+        <ul className='list'>
+          <li className='element'>{this.state.selected ? this.props.end() :
+            <div className={this.props.buttonOn} onClick= {this.selectNumber}><h1>{this.props.select === undefined ? this.props.element : this.props.select}</h1></div>}</li>
+        </ul>
       </div>
+
     )
   }
 }

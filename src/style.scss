@@ -1,0 +1,78 @@
+$size: 2;
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:"lato",sans-serif;
+  min-height: 100%;
+}
+
+#root {
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+button {
+  background-color: rgb(87, 209, 29);
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif;
+  border: 0;
+  margin-top: 1.5rem;
+  font-size: 1.2em;
+  min-width: 10rem;
+  min-height: 3rem;
+  border-radius: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.main-header {
+  width: 100%;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+
+}
+
+#grid {
+  min-width: 100%;
+  position: relative;
+  display: block;
+   div {
+    text-align: center;
+    width: $size;
+    text-align: center;
+    display: block;
+    margin: 2%;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.buttonOn {
+  background-color: rgb(87, 209, 29);
+}
+
+.SingleElement {
+  margin-top: 5%;
+  float: left;
+}
+
+#single {
+  margin-top: 5%;
+}
+
+#title{
+  font-size: 40px;
+  margin-top: 5%;
+}
