@@ -35,9 +35,12 @@ button {
 .main-header {
   width: 100%;
   position: relative;
-
+  background-image: url("https://gravitywerks.com/wp-content/uploads/2009/10/header.jpg");
+  height: 150px;
   img {
-    width: 100%;
+    width: 10%;
+    margin-top: 1%;
+    margin-left: 1%;
   }
 
 }
@@ -61,11 +64,13 @@ li {
 
 .buttonOn {
   background-color: rgb(87, 209, 29);
+  border-radius: 10%;
 }
 
 .SingleElement {
   margin-top: 5%;
   float: left;
+  text-align: center;
 }
 
 #single {

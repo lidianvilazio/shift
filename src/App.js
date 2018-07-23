@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className="main">
         <header className="main-header">
-          <img src="https://gravitywerks.com/wp-content/uploads/2009/10/header.jpg" alt='Header'/>
+          <img src="https://mms.businesswire.com/media/20180604005362/en/661106/5/Shift_Logo.jpg" alt='Header'/>
         </header>
           <Timer/>
       </div>

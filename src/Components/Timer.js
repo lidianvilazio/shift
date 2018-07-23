@@ -9,56 +9,34 @@ class  Timer  extends React.Component {
     list: [],
     interval: null,
     select: undefined,
-    pause: false,
   }
 
-  start = () => {
-    if(this.state.select) {
+  start = () => {  //start timer
       this.setState({
         interval: setInterval(() => {this.setState({num: this.state.num+1})}, 1000),
-        buttonOn: !this.state.buttonOn,
-        pause: false,
-        list: [...this.state.list, this.state.select],
-        select: undefined
+        buttonOn: true,
       })
-    } else {
-      this.setState({
-        interval: setInterval(() => {this.setState({num: this.state.num+1})}, 1000),
-        buttonOn: !this.state.buttonOn,
-        pause: false,
-      })
-
-    }
   }
 
   gettingNumber = () => {
-    let num = this.state.num / 2
+    let num = this.state.num / 2        // after buttonOn is true this function starts working getting the chosen number and splitting and saving on array list.
     if(this.state.list.indexOf(num) === -1) {
       this.setState({list: [num, ...this.state.list]})
     }
   }
 
-  clean = (num) => {
-    this.setState({
+  clean = (num) => {  // when a number is seleted on the unordered list this function is called by the child
+    this.setState({   //Component SingleElement and removes the numbers below the seleted number, keeps seleted number highlighted, and
+      num: num,       // resets the timer equal to the seleted number.
       list: this.state.list.slice(0,this.state.list.indexOf(num)),
       select: num
     })
   }
 
-  end = () => {
-    this.setState({
-      num: 0,
-      buttonOn: false,
-      pause: true,
-    }, () => {clearInterval(this.state.interval)})
-  }
-
 
   render() {
 
-    let element = this.state.list.map((element, elementKey) => {
-      return <SingleElement key={elementKey} element={element} clean={this.clean} end={this.end} pause={this.state.pause}/>
-    })
+    let element = this.state.list.map((element, elementKey) => <SingleElement key={elementKey} element={element} clean={this.clean}/>)
 
     return(
 
@@ -69,10 +47,10 @@ class  Timer  extends React.Component {
         </div>
         <div id='single'>
          {this.state.list.length > 0 ? element : null}
-         {this.state.select ? <SingleElement select={this.state.select} end={this.end} buttonOn={'buttonOn'} pause={this.state.pause}/> : null}
+         {this.state.select ? <SingleElement select={this.state.select} buttonOn={'buttonOn'}/> : null}
         </div>
       </div>
-      
+
     )
   }
 }
